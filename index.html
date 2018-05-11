@@ -9,24 +9,29 @@
         text-align: center;
       }
 
+		
       ul {
           list-style: none;
           padding: 0;
+          
       }
+      
 
       img {
           display: inline;
           width: 200px;
           height: 100px;
+          
       }
 
       #footer {
           width: 100%;
           border-top: solid 2px black;
-          background-color: white;
+          background-color: pink;
           position: fixed;
           bottom: 0;
       }
+      
     </style>
 
   </head>
@@ -34,23 +39,36 @@
 
       <div id='app'>
 
-        <div id='headers'>
+        <div class='center',id='headers'>
           <!-- Title and subtitles! -->
-          <h1>Vaaaaas guuuut yahhh!!</h1>
-          <h2>Oh you know, just chilling</h2>
+          <h1 id='title'>Guessing Game Mania!!</h1>
+          <h2 id='instructions'>Think you can guess a number between 0-100 in 5 goes?</h2>
         </div>
 
         <div id='main'>
-          <div id='input-parent'>
+          <div class='center',id='input-parent'>
             <!-- Player's guess input, and submit button -->
+            
+            <input type='text' name='userGuess' placeholder='Enter Guess' maxlength='3' autofocus><br><br>
+            <button>Submit yo!</button>
+            <!--input type='submit' value='Submit Guess'-->
           </div>
 
           <div id='guesses'>
             <!-- unordered list of guesses -->
+            <ul class='center'>
+				<li>First Guess</li>
+				<li>Second Guess</li>
+				<li>Third Guess</li>
+				<li>Fourth Guess</li>
+				<li>Fifth Guess</li>
+            </ul>
           </div>
 
-          <div id="menu-btns">
+          <div class='center',id="menu-btns">
             <!-- reset and hint buttons -->
+            <button>Reset your guesses</button>
+            <button>Hint!</button>
           </div>
         </div>
       </div>
@@ -64,7 +82,7 @@
           </div>
 
           <div class=''>
-            <h4>Project by YOUR NAME HERE</h4>
+            <h4>Project by Samurai San</h4>
           </div>
 
           <div class=''>
