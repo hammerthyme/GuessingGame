@@ -4,93 +4,66 @@
     <title>Guessing Game</title>
 
     <!-- Bootstrap and CSS here-->
-    <style>
-      .center {
-        text-align: center;
-      }
-
-		
-      ul {
-          list-style: none;
-          padding: 0;
-          
-      }
-      
-
-      img {
-          display: inline;
-          width: 200px;
-          height: 100px;
-          
-      }
-
-      #footer {
-          width: 100%;
-          border-top: solid 2px black;
-          background-color: pink;
-          position: fixed;
-          bottom: 0;
-      }
-      
-    </style>
-
+    <link rel='stylesheet' href='/Users/Samer/Fullstack/bootstrap-4.0.0-dist/css/bootstrap.css'>
+    <link rel="stylesheet" href="main.css">
+    
   </head>
   <body>
 
-      <div id='app'>
+      <div class='center container' id='app'>
 
-        <div class='center',id='headers'>
+        <div id='headers'>
           <!-- Title and subtitles! -->
           <h1 id='title'>Guessing Game Mania!!</h1>
-          <h2 id='instructions'>Think you can guess a number between 0-100 in 5 goes?</h2>
+          <h3 id='instructions'>Think you can guess a number between 0-100 in 5 goes?</h3>
         </div>
 
         <div id='main'>
-          <div class='center',id='input-parent'>
+          <div id='input-parent'>
             <!-- Player's guess input, and submit button -->
-            
-            <input type='text' name='userGuess' placeholder='Enter Guess' maxlength='3' autofocus><br><br>
-            <button>Submit yo!</button>
-            <!--input type='submit' value='Submit Guess'-->
+            <div id='submit-parent'>
+                <input id='player-input' class='center' type='text' name='userGuess' placeholder='#' maxlength='3' autofocus>
+                <div>
+                    <button class='btn btn-success center' id='submit'>Yo!</button>
+                </div>
+            </div>
           </div>
 
           <div id='guesses'>
             <!-- unordered list of guesses -->
-            <ul class='center'>
-				<li>First Guess</li>
-				<li>Second Guess</li>
-				<li>Third Guess</li>
-				<li>Fourth Guess</li>
-				<li>Fifth Guess</li>
+            <ul class='guess list-inline'>
+              <li>First Guess</li>
+              <li>Second Guess</li>
+              <li>Third Guess</li>
+              <li>Fourth Guess</li>
+              <li>Fifth Guess</li>
             </ul>
           </div>
 
-          <div class='center',id="menu-btns">
+          <div id="menu-btns">
             <!-- reset and hint buttons -->
-            <button>Reset your guesses</button>
-            <button>Hint!</button>
+            <button class='btn btn-danger'>Reset your guesses</button>
+            <button class='btn btn-info'>Hint!</button>
           </div>
         </div>
       </div>
 
 
 
-    <div id='footer'>
-        <div>
-          <div class=''>
+    <div id='footer' class='center'>
+      <div class='row'>
+          <div class='col-sm-4' id='FS'>
             <img src='fa-logo@2x.png'></img>
           </div>
 
-          <div class=''>
+          <div class='col-sm-4' id='credit'>
             <h4>Project by Samurai San</h4>
           </div>
 
-          <div class=''>
+          <div class='col-sm-4' id='GH'>
             <img src='grace_hopper_academy.png'></img>
           </div>
-
-
-        </div>
+      </div>
     </div>
 
   </body>
