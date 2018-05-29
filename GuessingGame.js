@@ -44,7 +44,7 @@ Game.prototype.checkGuess = function(){
         return 'You have already guessed that number.'
     }
     this.pastGuesses.push(this.playersGuess)
-    if(this.pastGuesses.length > 4){
+    if(this.pastGuesses.length >= 5){
         return 'You Lose.'
     }
     if(this.difference() < 10){
@@ -68,3 +68,67 @@ Game.prototype.provideHint = function(){
     shuffle(hintArr)
     return hintArr
 }
+
+$(document).ready(function(){
+    var myGame = newGame();
+    console.log('winning number', myGame.winningNumber)
+    function submitGuess(){
+        var guess = +$('#player-input').val()
+        $('#player-input').val('')
+        var guessOutput = myGame.playersGuessSubmission(guess)
+        $('#title').text(guessOutput)
+        var numGuesses = myGame.pastGuesses.length
+        
+
+        function winOrLose(){
+            $('#player-input, #submit,#hint').prop('disabled',true)
+        }
+
+        if(guessOutput.includes('number')){
+            $('#instructions').text('Guess again bitch')
+        } else if(guessOutput.includes('Win')){
+            winOrLose()
+            $(`.guess li:nth-child(${numGuesses + 1})`).text(guess)
+            $('#instructions').text('You\'re pretty fly for a white guy! Another?')
+        } else if(guessOutput.includes('You\'re')){
+            $(`.guess li:nth-child(${numGuesses})`).text(guess)
+            if(myGame.isLower()){
+                $('#instructions').text('Guess higher bitch')
+            } else {
+                $('#instructions').text('Guess lower bitch')
+            }
+        } else if(guessOutput.includes('Lose')){
+            winOrLose()
+            $(`.guess li:nth-child(${numGuesses})`).text(guess)
+            $('#instructions').text('Fancy another game, Charles?')
+        }
+    }
+    $('#submit').on('click',function(){
+        submitGuess()
+    })
+
+    $('#player-input').on('keypress',function(event){
+        if(myGame.pastGuesses.length < 5){
+            if(event.which === 13) { 
+                submitGuess()
+            } 
+        }   
+    })
+    $('#reset').on('click',function(){
+        myGame = newGame()
+        console.log('winning number', myGame.winningNumber)
+        $('#title').text('Here we go again!')
+        $('#instructions').text("Don't be shy, guess a number")
+        $('#player-input, #submit, #hint').prop('disabled',false)
+        $('ul li').text('-')
+    })
+    $('#hint').click(function(){
+        $('#title').text(`Hint: ${myGame.provideHint()}`)
+    })
+  })
+
+  //TO DO
+ /*  Prompt a response when invalid values are entered
+  Fix sliding Submit button
+  Maybe put a white box behind main content for easier readibility
+   */

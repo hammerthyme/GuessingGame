@@ -58,12 +58,13 @@ ul {
 .guess.list-inline li{
     display: inline-block;
     margin: 5px;
-    border-style: dotted;
+    border-style: solid;
     border-width: 1px;
     border-radius: 10px;
     padding: 20px 25px;
     font-size: 20px;
-    color: orange;
+    font-weight: bold;
+    color: rgb(248, 141, 26);
 }
 
 
@@ -77,7 +78,7 @@ img {
 #footer {
     width: 100%;
     border-top: solid 2px black;
-    background-color: pink;
+    background-color: green;
     position: fixed;
     bottom: 0;
     max-height: 250px;
