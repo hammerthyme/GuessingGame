@@ -38,23 +38,46 @@ Game.prototype.playersGuessSubmission = function(num){
 }
 
 Game.prototype.checkGuess = function(){
-    if(this.playersGuess === this.winningNumber){
-        return 'You Win!'
-    } else if(this.pastGuesses.includes(this.playersGuess)) {
+    
+    //check if already guessed
+    if(this.pastGuesses.includes(this.playersGuess)) {
+        $('#instructions').text('Guess again bitch')
         return 'You have already guessed that number.'
     }
+
     this.pastGuesses.push(this.playersGuess)
-    if(this.pastGuesses.length >= 5){
-        return 'You Lose.'
+    var numGuesses = this.pastGuesses.length
+
+    function winOrLose(){
+        $('#player-input, #submit, #hint').prop('disabled',true)
+        $(`.guess li:nth-child(${numGuesses})`).text(this.playersGuess)
     }
-    if(this.difference() < 10){
-        return "You\'re burning up!"
-    } else if(this.difference() < 25){
-        return "You\'re lukewarm."
-    } else if(this.difference() < 50){
-        return "You\'re a bit chilly."
+
+    //check guess
+    if(this.playersGuess === this.winningNumber){
+        winOrLose.call(this)
+        $('#instructions').text('You\'re pretty fly for a white guy! Another?')
+        return 'You Win!'
+    } else if(this.pastGuesses.length > 4){
+        winOrLose.call(this)
+        $('#instructions').text('Fancy another game, Charles?')
+        return 'You Lose.'
     } else {
-        return "You\'re ice cold!"
+        if(this.isLower()){
+            $('#instructions').text('Guess higher bitch')
+        } else {
+            $('#instructions').text('Guess lower bitch')
+        }
+        $(`.guess li:nth-child(${numGuesses})`).text(this.playersGuess)
+        if(this.difference() < 10){
+            return "You\'re burning up!"
+        } else if(this.difference() < 25){
+            return "You\'re lukewarm."
+        } else if(this.difference() < 50){
+            return "You\'re a bit chilly."
+        } else {
+            return "You\'re ice cold!"
+        }
     }
 }
 
@@ -74,39 +97,14 @@ $(document).ready(function(){
     console.log('winning number', myGame.winningNumber)
     function submitGuess(){
         var guess = +$('#player-input').val()
-        $('#player-input').val('')
         var guessOutput = myGame.playersGuessSubmission(guess)
+        $('#player-input').val('')
         $('#title').text(guessOutput)
-        var numGuesses = myGame.pastGuesses.length
-        
-
-        function winOrLose(){
-            $('#player-input, #submit,#hint').prop('disabled',true)
-        }
-
-        if(guessOutput.includes('number')){
-            $('#instructions').text('Guess again bitch')
-        } else if(guessOutput.includes('Win')){
-            winOrLose()
-            $(`.guess li:nth-child(${numGuesses + 1})`).text(guess)
-            $('#instructions').text('You\'re pretty fly for a white guy! Another?')
-        } else if(guessOutput.includes('You\'re')){
-            $(`.guess li:nth-child(${numGuesses})`).text(guess)
-            if(myGame.isLower()){
-                $('#instructions').text('Guess higher bitch')
-            } else {
-                $('#instructions').text('Guess lower bitch')
-            }
-        } else if(guessOutput.includes('Lose')){
-            winOrLose()
-            $(`.guess li:nth-child(${numGuesses})`).text(guess)
-            $('#instructions').text('Fancy another game, Charles?')
-        }
     }
     $('#submit').on('click',function(){
         submitGuess()
     })
-
+    //allow enter to be used to submit guess
     $('#player-input').on('keypress',function(event){
         if(myGame.pastGuesses.length < 5){
             if(event.which === 13) { 
