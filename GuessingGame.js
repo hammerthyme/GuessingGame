@@ -60,23 +60,23 @@ Game.prototype.checkGuess = function(){
         return 'You Win!'
     } else if(this.pastGuesses.length > 4){
         winOrLose.call(this)
-        $('#instructions').text('Fancy another game, Charles?')
-        return 'You Lose.'
+        $('#instructions').text('Fancy another game? Tap \'Try again\' below.')
+        return `You lose, the winning number was....${this.winningNumber}!`
     } else {
         if(this.isLower()){
-            $('#instructions').text('Guess higher bitch')
+            $('#instructions').text('Try guessing higher').css('font-weight','bold')
         } else {
-            $('#instructions').text('Guess lower bitch')
+            $('#instructions').text('Try guessing lower')
         }
         $(`.guess li:nth-child(${numGuesses})`).text(this.playersGuess)
         if(this.difference() < 10){
-            return "You\'re burning up!"
+            return "Ooooooh SUGAR, you're almost there!"
         } else if(this.difference() < 25){
-            return "You\'re lukewarm."
+            return "Not bad, you're getting there!"
         } else if(this.difference() < 50){
-            return "You\'re a bit chilly."
+            return "I'd be lying if I said you were close."
         } else {
-            return "You\'re ice cold!"
+            return "Yeah... you really couldn't be further."
         }
     }
 }
@@ -92,7 +92,7 @@ Game.prototype.provideHint = function(){
     return hintArr
 }
 
-$(document).ready(function(){
+$(document).ready(function(){ 
     var myGame = newGame();
     console.log('winning number', myGame.winningNumber)
     function submitGuess(){
