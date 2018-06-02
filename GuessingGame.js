@@ -56,7 +56,7 @@ Game.prototype.checkGuess = function(){
     //check guess
     if(this.playersGuess === this.winningNumber){
         winOrLose.call(this)
-        $('#instructions').text('You\'re pretty fly for a white guy! Another?')
+        $('#instructions').text('You\'re like the Alan Turing of guessing! Another?')
         return 'You Win!'
     } else if(this.pastGuesses.length > 4){
         winOrLose.call(this)
